@@ -42,8 +42,8 @@ class HexGenerator
 	end
 	
 
-	def genShiftNum diff=0, odd=true 
-		temp = ((3+diff*2) + Random.rand((3+diff*2-1)))*2 + odd = (odd ? 1 : 0)
+	def genShiftNum diff=0, odd=true
+		temp = ((2+diff*2) + Random.rand((3+diff*2)))*2 + odd = (odd ? 1 : 0)
 	end
 
 end
