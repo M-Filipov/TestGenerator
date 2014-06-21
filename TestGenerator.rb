@@ -1,152 +1,151 @@
-require_relative "NumberGenerator"
+	require_relative "NumberGenerator"
 
-class TestGenerator < NumberGenerator
+	class TestGenerator < NumberGenerator
 	
-	@t = NumberGenerator.new 0
+		@t = NumberGenerator.new 0
 	
-	@@orig = @t.genSimpleHex 2
-	@@insert = @t.genSingleDigitHex
+		@@orig = @t.genSimpleHex 2
+		@@insert = @t.genSingleDigitHex
+		@@testValue = @t.genComplexHex 2
+	puts @@testValue
 	
-	
-	
-	def initialize 
-		@testsNum = ARGV[0]
-	end
-		
-	def orType
-		shift = genShiftNum 0, false
-		a = (@@orig.hex | (@@insert.hex << shift)).to_s(16)
-		s = String.new
-		s << "a = ? \n"
-	    s << "int orig = #{@@orig} \n"
-	    s << "int insert = 000#{@@insert} \n"
-	    s << "int a = orig | (insert << #{shift}) \n"
-	    s << "a = #{a}"
-	    puts s
-	    puts
-	    puts
-	    puts    
-	    return s
-	end
-		
-		
-	def andType 
-		shift = genShiftNum 0, false
-		a = (@@orig.hex | (@@insert.hex << shift)).to_s(16)
-		shift1 = genShiftNum 0, true
-		b = (@@orig.hex | (@@insert.hex << shift1)).to_s(16)
-		andd = a.hex & b.hex
-		
-		s = String.new
-		s << "andd = ? \n"
-	    s << "int orig = #{@@orig} \n"
-	    s << "int insert = 000#{@@insert} \n"
-	    s << "int a = orig | (insert << #{shift}) \n"
-	   	s << "int b = orig | (insert << #{shift1}) \n"
-	   	s << "int andd = a & b \n"
-	    s << "andd = #{andd} \n \n"
-	    puts s
-	    puts
-	    puts
-	    return s
-	end
-	
-	
-	def xorType 
-		shift = genShiftNum 0, true
-		a = (@@orig.hex | (@@insert.hex << shift)).to_s(16)
-		shift1 = genShiftNum 0, true
-		b = (@@orig.hex | (@@insert.hex << shift1)).to_s(16)
-		xor = (a.hex ^ b.hex).to_s(16)
-		
-		s = String.new
-		s << "xor = ? \n"
-	    s << "int orig = #{@@orig} \n"
-	    s << "int insert = 000#{@@insert} \n"
-	    s << "int a = orig | (insert << #{shift}) \n"
-	   	s << "int b = orig | (insert << #{shift1}) \n"
-	   	s << "int xor = a ^ b \n"
-	    s << "xor = #{xor} "
-	    puts s
-	    puts
-	    puts
-	    return s
-	end
-	
-	
-
-	def shestaZad 
-		i = @@orig
-		shift = genShiftNum 1, true
-		left = (i.hex | (1 << shift)).to_s(16)
-		
-		s = String.new
-		s << "left = ? \n"
-		s << "int i = #{@@orig} \n"
-		s << "int left = #{i} | (1 << #{shift}) \n" 
-		s << "left = #{left} \n\n\n"
-		puts s
-		puts
-		puts
-		return s
-	end
-	
-	
-	def sevenZad 
-		value1 = genComplexHex 2
-		value2 =  genComplexHex 1
-		shift1 = genShiftNum 0, true
-		shift2 = genShiftNum 0, false
-		test = value1.hex
-		result = ( (value1.to_i(16) << shift1) ^ (value2.hex >> shift2) ).to_s(16)
-			
-		s = String.new
-		s << "result = ? \n"
-		s << "long value1 = #{value1} \n"
-		s << "long value2 = #{value2} \n"
-		s << "int result = (#{value1} << #{shift1}) ^ (#{value2} >> #{shift2}) \n \n \n"		
-		puts s
-		return s 
-		
-	end
-	
-	
-	
-	def osmaZad 
-		value1 = genDec 1
-		value2 = genDec 2
-		shift1 = genShiftNum 0, false
-		shift2 = genShiftNum 0, true
-		result = (value1 << shift1) ^ (value2 >> shift2)
-		
-		s = String.new
-		s << "result = ? \n"
-		s << "value1 = #{value1} \n" 
-		s << "value2 = #{value2} \n"
-		s << "int result = (value1 << #{shift1}) ^ (value2 >> #{shift2})\n \n \n"	
-		puts s
-		
-		return s
-	end
-	
-	
-	
-	
-	def devetaZad 
-		testValue = genComplexHex 2
-		a = 0
-		shift = genShiftNum 0, false
-		if(testValue.hex & (0x1 << shift))
-			a = 1
-		else
-			a = 2
+		def initialize 
+			@testsNum = ARGV[0]
 		end
 		
-		s = String.new
-		s << "a = ?\n"
-		s << "long testValue = 0x#{testValue} \n"
-		s << "int a = 0 \n"
-		s << "if (testValue & (1 << #{shift}))
+		def orType
+			shift = genShiftNum 0, false
+			a = (@@orig.hex | (@@insert.hex << shift)).to_s(16)
+			s = String.new
+			s << "a = ? \n"
+			s << "int orig = #{@@orig} \n"
+			s << "int insert = 000#{@@insert} \n"
+			s << "int a = orig | (insert << #{shift}) \n"
+			s << "a = #{a}"
+			puts s
+			puts
+			puts
+			puts    
+			return s
+		end
+		
+		
+		def andType 
+			shift = genShiftNum 0, false
+			a = (@@orig.hex | (@@insert.hex << shift)).to_s(16)
+			shift1 = genShiftNum 0, true
+			b = (@@orig.hex | (@@insert.hex << shift1)).to_s(16)
+			andd = a.hex & b.hex
+		
+			s = String.new
+			s << "andd = ? \n"
+			s << "int orig = #{@@orig} \n"
+			s << "int insert = 000#{@@insert} \n"
+			s << "int a = orig | (insert << #{shift}) \n"
+		   	s << "int b = orig | (insert << #{shift1}) \n"
+		   	s << "int andd = a & b \n"
+			s << "andd = #{andd} \n \n"
+			puts s
+			puts
+			puts
+			return s
+		end
+	
+	
+		def xorType 
+			shift = genShiftNum 0, true
+			a = (@@orig.hex | (@@insert.hex << shift)).to_s(16)
+			shift1 = genShiftNum 0, true
+			b = (@@orig.hex | (@@insert.hex << shift1)).to_s(16)
+			xor = (a.hex ^ b.hex).to_s(16)
+		
+			s = String.new
+			s << "xor = ? \n"
+			s << "int orig = #{@@orig} \n"
+			s << "int insert = 000#{@@insert} \n"
+			s << "int a = orig | (insert << #{shift}) \n"
+		   	s << "int b = orig | (insert << #{shift1}) \n"
+		   	s << "int xor = a ^ b \n"
+			s << "xor = #{xor} "
+			puts s
+			puts
+			puts
+			return s
+		end
+	
+	
+
+		def shestaZad 
+			i = @@orig
+			shift = genShiftNum 1, true
+			left = (i.hex | (1 << shift)).to_s(16)
+		
+			s = String.new
+			s << "left = ? \n"
+			s << "int i = #{@@orig} \n"
+			s << "int left = #{i} | (1 << #{shift}) \n" 
+			s << "left = #{left} \n\n\n"
+			puts s
+			puts
+			puts
+			return s
+		end
+	
+	
+		def sevenZad 
+			value1 = genComplexHex 2
+			value2 =  genComplexHex 1
+			shift1 = genShiftNum 0, true
+			shift2 = genShiftNum 0, false
+			test = value1.hex
+			result = ( (value1.to_i(16) << shift1) ^ (value2.hex >> shift2) ).to_s(16)
+			
+			s = String.new
+			s << "result = ? \n"
+			s << "long value1 = #{value1} \n"
+			s << "long value2 = #{value2} \n"
+			s << "int result = (#{value1} << #{shift1}) ^ (#{value2} >> #{shift2}) \n \n \n"		
+			puts s
+			return s 
+		
+		end
+	
+	
+	
+		def osmaZad 
+			value1 = genDec 1
+			value2 = genDec 2
+			shift1 = genShiftNum 0, false
+			shift2 = genShiftNum 0, true
+			result = (value1 << shift1) ^ (value2 >> shift2)
+		
+			s = String.new
+			s << "result = ? \n"
+			s << "value1 = #{value1} \n" 
+			s << "value2 = #{value2} \n"
+			s << "int result = (value1 << #{shift1}) ^ (value2 >> #{shift2})\n \n \n"	
+			puts s
+		
+			return s
+		end
+	
+	
+	
+	
+		def devetaZad 
+			a = 0
+			shift = genShiftNum 0, false
+			if(@@testValue.hex & (0x1 << shift))
+				a = 1
+			else
+				a = 2
+			end
+		
+			s = String.new
+			s << "a = ?\n"
+			s << "long testValue = #{@@testValue} \n"
+			s << "int a = 0 \n"
+			s << "if (testValue & (1 << #{shift}))
 {
 a = 1
 }
@@ -154,8 +153,37 @@ else
 {
 a = 2
 } \n\n\n"
-		puts s
-		return s
+
+			puts s
+			return s
+		end
+	
+	
+	
+	def desetaZad 
+		a = 0
+		result = 0
+		shift = genShiftNum 0, false
+		if( (result = @@testValue.hex & @@testValue.hex ^ @@testValue.hex | (0x1 << shift)) )
+			a = 1
+		else
+			a = 2
+		end
+		
+		s = String.new
+		s << "a = ?, result = ? \n"
+		s << "a = 0 \n"
+		s << "result = 0\n"
+		s << "if( (result = testValue & testValue ^ testValue | (1 << #{shift}) )
+{
+a = 1;
+}
+else
+{
+a = 2
+}  \n \n \n \n"
+	
+	puts s
 	end
 	
 	
@@ -163,20 +191,18 @@ a = 2
 	
 	
 	
-	
-	
-	
 
-end
+	end
 
 
 
-test = TestGenerator.new
+	test = TestGenerator.new
 
-test.orType
-test.andType
-test.xorType
-test.shestaZad
-test.sevenZad
-test.osmaZad
-test.devetaZad
+	test.orType
+	test.andType
+	test.xorType
+	test.shestaZad
+	test.sevenZad
+	test.osmaZad
+	test.devetaZad
+	test.desetaZad
