@@ -1,17 +1,16 @@
 	require_relative "NumberGenerator"
 
 	class TestGenerator < NumberGenerator
+		
+		def initialize 
+		end
 	
 		@t = NumberGenerator.new 0
 	
 		@@orig = @t.genSimpleHex 2
 		@@insert = @t.genSingleDigitHex
 		@@testValue = @t.genComplexHex 2
-	puts @@testValue
-	
-		def initialize 
-			@testsNum = ARGV[0]
-		end
+		@@answers = String.new
 		
 		def orType
 			shift = genShiftNum 0, false
@@ -20,12 +19,9 @@
 			s << "a = ? \n"
 			s << "int orig = #{@@orig} \n"
 			s << "int insert = 000#{@@insert} \n"
-			s << "int a = orig | (insert << #{shift}) \n"
-			s << "a = #{a}"
-			puts s
-			puts
-			puts
-			puts    
+			s << "int a = orig | (insert << #{shift}) \n\n\n"
+			@@answers << "a = #{a}\n"
+			
 			return s
 		end
 		
@@ -43,11 +39,8 @@
 			s << "int insert = 000#{@@insert} \n"
 			s << "int a = orig | (insert << #{shift}) \n"
 		   	s << "int b = orig | (insert << #{shift1}) \n"
-		   	s << "int andd = a & b \n"
-			s << "andd = #{andd} \n \n"
-			puts s
-			puts
-			puts
+		   	s << "int andd = a & b \n\n\n"
+			@@answers << "andd = #{andd} \n"
 			return s
 		end
 	
@@ -65,11 +58,8 @@
 			s << "int insert = 000#{@@insert} \n"
 			s << "int a = orig | (insert << #{shift}) \n"
 		   	s << "int b = orig | (insert << #{shift1}) \n"
-		   	s << "int xor = a ^ b \n"
-			s << "xor = #{xor} "
-			puts s
-			puts
-			puts
+		   	s << "int xor = a ^ b \n\n\n"
+			@@answers << "xor = #{xor} \n"
 			return s
 		end
 	
@@ -83,11 +73,8 @@
 			s = String.new
 			s << "left = ? \n"
 			s << "int i = #{@@orig} \n"
-			s << "int left = #{i} | (1 << #{shift}) \n" 
-			s << "left = #{left} \n\n\n"
-			puts s
-			puts
-			puts
+			s << "int left = #{i} | (1 << #{shift}) \n\n\n" 
+			@@answers << "left = #{left} \n"
 			return s
 		end
 	
@@ -105,7 +92,7 @@
 			s << "long value1 = #{value1} \n"
 			s << "long value2 = #{value2} \n"
 			s << "int result = (#{value1} << #{shift1}) ^ (#{value2} >> #{shift2}) \n \n \n"		
-			puts s
+			@@answers << "result = #{result} \n"
 			return s 
 		
 		end
@@ -124,8 +111,7 @@
 			s << "value1 = #{value1} \n" 
 			s << "value2 = #{value2} \n"
 			s << "int result = (value1 << #{shift1}) ^ (value2 >> #{shift2})\n \n \n"	
-			puts s
-		
+			@@answers << "result = #{result} \n"
 			return s
 		end
 	
@@ -153,8 +139,7 @@ else
 {
 a = 2
 } \n\n\n"
-
-			puts s
+		@@answers << "a = #{a}\n"
 			return s
 		end
 	
@@ -183,7 +168,8 @@ else
 a = 2
 }  \n \n \n \n"
 	
-	puts s
+	@@answers << "a = #{a} \n"
+	return s
 	end
 	
 	
@@ -200,17 +186,35 @@ a = 2
 		s << "int value2 = #{value2} \n"
 		s << "int result = ( (value1 << #{shift1}) ^ (value2 >> #{shift2}) ) \n\n\n" 
 
-		puts s
+		@@answers << "result = #{result} \n"
 		return s
 	end
 	
 	
 	
+	def twelveth
+		value1 = genDec 3
+		value2 = genDec 35
+		shift1 = genShiftNum 0, false
+		shift2 = genShiftNum 0, true		
+		result = ( (value1 << shift1) ^ (value2 >> shift2) )
+		
+		s = String.new
+		s << "result = ? \n"
+		s << "int value1 = #{value1} \n"
+		s << "int value2 = #{value2} \n"
+		s << "int result = ( (value1 << #{shift1}) ^ (value2 >> #{shift2}) ) \n\n\n" 
+
+		@@answers << "result = #{result}"
+		
+		puts @@answers
+		return s
+	end
+	
+	
 	
 
 end
-
-
 
 	test = TestGenerator.new
 
@@ -223,3 +227,4 @@ end
 	test.devetaZad
 	test.desetaZad
 	test.eleventh
+	test.twelveth
