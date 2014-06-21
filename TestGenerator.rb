@@ -46,7 +46,6 @@ class TestGenerator < NumberGenerator
 	    puts
 	end
 	
-	
 
 
 end
