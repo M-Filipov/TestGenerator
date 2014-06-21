@@ -132,6 +132,32 @@ class TestGenerator < NumberGenerator
 	
 	
 	
+	def devetaZad 
+		testValue = genComplexHex 2
+		a = 0
+		shift = genShiftNum 0, false
+		if(testValue.hex & (0x1 << shift))
+			a = 1
+		else
+			a = 2
+		end
+		
+		s = String.new
+		s << "a = ?\n"
+		s << "long testValue = 0x#{testValue} \n"
+		s << "int a = 0 \n"
+		s << "if (testValue & (1 << #{shift}))
+{
+a = 1
+}
+else
+{
+a = 2
+} \n\n\n"
+		puts s
+		return s
+	end
+	
 	
 	
 	
@@ -153,3 +179,4 @@ test.xorType
 test.shestaZad
 test.sevenZad
 test.osmaZad
+test.devetaZad
