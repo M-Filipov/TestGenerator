@@ -2,10 +2,12 @@ require_relative "NumberGenerator"
 
 class TestGenerator < NumberGenerator
 	
-	@@t = NumberGenerator.new 0
+	@t = NumberGenerator.new 0
 	
-	@@orig = @@t.genSimpleHex 2
-	@@insert = @@t.genSingleDigitHex
+	@@orig = @t.genSimpleHex 2
+	@@insert = @t.genSingleDigitHex
+	
+	
 	
 	def initialize 
 		@testsNum = ARGV[0]
@@ -22,7 +24,8 @@ class TestGenerator < NumberGenerator
 	    s << "a = #{a}"
 	    puts s
 	    puts
-	    
+	    puts
+	    puts    
 	    return s
 	end
 		
@@ -41,9 +44,11 @@ class TestGenerator < NumberGenerator
 	    s << "int a = orig | (insert << #{shift}) \n"
 	   	s << "int b = orig | (insert << #{shift1}) \n"
 	   	s << "int andd = a & b \n"
-	    s << "andd = #{andd} "
+	    s << "andd = #{andd} \n \n"
 	    puts s
 	    puts
+	    puts
+	    return s
 	end
 	
 	
@@ -64,6 +69,8 @@ class TestGenerator < NumberGenerator
 	    s << "xor = #{xor} "
 	    puts s
 	    puts
+	    puts
+	    return s
 	end
 	
 	
@@ -77,10 +84,59 @@ class TestGenerator < NumberGenerator
 		s << "left = ? \n"
 		s << "int i = #{@@orig} \n"
 		s << "int left = #{i} | (1 << #{shift}) \n" 
-		s << "left = #{left}"
-	
+		s << "left = #{left} \n\n\n"
 		puts s
+		puts
+		puts
+		return s
 	end
+	
+	
+	def sevenZad 
+		value1 = genComplexHex 2
+		value2 =  genComplexHex 1
+		shift1 = genShiftNum 0, true
+		shift2 = genShiftNum 0, false
+		test = value1.hex
+		result = ( (value1.to_i(16) << shift1) ^ (value2.hex >> shift2) ).to_s(16)
+			
+		s = String.new
+		s << "result = ? \n"
+		s << "long value1 = #{value1} \n"
+		s << "long value2 = #{value2} \n"
+		s << "int result = (#{value1} << #{shift1}) ^ (#{value2} >> #{shift2}) \n \n \n"		
+		puts s
+		return s 
+		
+	end
+	
+	
+	
+	def osmaZad 
+		value1 = genDec 1
+		value2 = genDec 2
+		shift1 = genShiftNum 0, false
+		shift2 = genShiftNum 0, true
+		result = (value1 << shift1) ^ (value2 >> shift2)
+		
+		s = String.new
+		s << "result = ? \n"
+		s << "value1 = #{value1} \n" 
+		s << "value2 = #{value2} \n"
+		s << "int result = (value1 << #{shift1}) ^ (value2 >> #{shift2})\n \n \n"	
+		puts s
+		
+		return s
+	end
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	
@@ -95,3 +151,5 @@ test.orType
 test.andType
 test.xorType
 test.shestaZad
+test.sevenZad
+test.osmaZad
