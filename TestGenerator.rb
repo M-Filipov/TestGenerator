@@ -187,12 +187,28 @@ a = 2
 	end
 	
 	
+	def eleventh
+		value1 = genDec 1
+		value2 = genDec 5
+		shift1 = genShiftNum 0, true
+		shift2 = genShiftNum 0, false		
+		result = ( (value1 << shift1) ^ (value2 >> shift2) )
+		
+		s = String.new
+		s << "result = ? \n"
+		s << "int value1 = #{value1} \n"
+		s << "int value2 = #{value2} \n"
+		s << "int result = ( (value1 << #{shift1}) ^ (value2 >> #{shift2}) ) \n\n\n" 
+
+		puts s
+		return s
+	end
 	
 	
 	
 	
 
-	end
+end
 
 
 
@@ -206,3 +222,4 @@ a = 2
 	test.osmaZad
 	test.devetaZad
 	test.desetaZad
+	test.eleventh
