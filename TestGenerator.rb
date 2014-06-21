@@ -11,7 +11,7 @@ class TestGenerator < NumberGenerator
 		@testsNum = ARGV[0]
 	end
 		
-	def firstType
+	def orType
 		shift = genShiftNum 0, false
 		a = (@@orig.hex | (@@insert.hex << shift)).to_s(16)
 		s = String.new
@@ -27,15 +27,15 @@ class TestGenerator < NumberGenerator
 	end
 		
 		
-	def secondType 
+	def andType 
 		shift = genShiftNum 0, false
 		a = (@@orig.hex | (@@insert.hex << shift)).to_s(16)
-		shift1 = genShiftNum 0, false
+		shift1 = genShiftNum 0, true
 		b = (@@orig.hex | (@@insert.hex << shift1)).to_s(16)
 		andd = a.hex & b.hex
 		
 		s = String.new
-		s << "a = ? \n"
+		s << "andd = ? \n"
 	    s << "int orig = #{@@orig} \n"
 	    s << "int insert = 000#{@@insert} \n"
 	    s << "int a = orig | (insert << #{shift}) \n"
@@ -46,7 +46,44 @@ class TestGenerator < NumberGenerator
 	    puts
 	end
 	
+	
+	def xorType 
+		shift = genShiftNum 0, true
+		a = (@@orig.hex | (@@insert.hex << shift)).to_s(16)
+		shift1 = genShiftNum 0, true
+		b = (@@orig.hex | (@@insert.hex << shift1)).to_s(16)
+		xor = (a.hex ^ b.hex).to_s(16)
+		
+		s = String.new
+		s << "xor = ? \n"
+	    s << "int orig = #{@@orig} \n"
+	    s << "int insert = 000#{@@insert} \n"
+	    s << "int a = orig | (insert << #{shift}) \n"
+	   	s << "int b = orig | (insert << #{shift1}) \n"
+	   	s << "int xor = a ^ b \n"
+	    s << "xor = #{xor} "
+	    puts s
+	    puts
+	end
+	
+	
 
+	def shestaZad 
+		i = @@orig
+		shift = genShiftNum 1, true
+		left = (i.hex | (1 << shift)).to_s(16)
+		
+		s = String.new
+		s << "left = ? \n"
+		s << "int i = #{@@orig} \n"
+		s << "int left = #{i} | (1 << #{shift}) \n" 
+		s << "left = #{left}"
+	
+		puts s
+	end
+	
+	
+	
 
 end
 
@@ -54,7 +91,7 @@ end
 
 test = TestGenerator.new
 
-test.firstType
-test.secondType
-
-
+test.orType
+test.andType
+test.xorType
+test.shestaZad
