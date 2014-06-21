@@ -1,4 +1,4 @@
-class HexGenerator
+class NumberGenerator
 	
 
 	def initialize args
