@@ -8,16 +8,16 @@ Uses:  -rubygems
        -cgi
        
 Possible actions to be taken before execute
-      - Lack of ruby gems installed:
-            - sudo gem update --system
-            - gem install rubygems-update
-            - sudo update_rubygems
+       - Lack of ruby gems installed 
+            $ sudo gem update --system
+            $ gem install rubygems-update
+            $ sudo update_rubygems
             
       - Lack of Prawn installed:
-            - sudo gem install prawn
+            $ sudo gem install prawn
             
       - Lack of pdf-reader installed:
-            - sudo gem install pdf-reader
+            $ sudo gem install pdf-reader
             
 Execute: $ ruby Main arg
 
