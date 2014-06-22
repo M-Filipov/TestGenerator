@@ -8,12 +8,13 @@ Uses:  -rubygems
        -cgi
        
 Possible actions to be taken before execute
-       - Lack of ruby gems installed 
+
+      - Lack of ruby gems installed 
             $ sudo gem update --system
             $ gem install rubygems-update
             $ sudo update_rubygems
             
-      - Lack of Prawn installed:
+      - Lack of Prawn installed
             $ sudo gem install prawn
             
       - Lack of pdf-reader installed:
