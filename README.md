@@ -22,9 +22,11 @@ Possible actions to be taken before execute
       - Lack of pdf-reader installed:
             $ sudo gem install pdf-reader
             
-Execute: $ ruby Main arg
+Execute: $ ruby Main.rb arg
 
 arg: positive integer, specifies number of tests to be generated.
+
+On execute: Creates arg number of html/pdf tests and html/pdf answers in HtmlTests and PdfTests folders.
 
 Files:        
 
@@ -34,7 +36,6 @@ Files:
        -PdfGenerator.rb
        -HtmlGenerator.rb
        
-On execute: Creates arg number of html/pdf tests and html/pdf answers in HtmlTests and PdfTests folders.
        
 
 
