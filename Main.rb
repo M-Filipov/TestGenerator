@@ -12,12 +12,28 @@ class Main
 	end
 
 	def start
+		createDirectories
 		puts "Gnerating..."
+		puts "creating PDF files into PdfTests/"
+		puts "creating HTML files into HtmlTests/"
 		@numOfTests.to_i.times do |i|
 			@@pg.createPdf("test" + (i+1).to_s+".pdf")
 			@@hg.createHtml("test" + (i+1).to_s+".html")
 		end
 		puts"Finished..."
+	end
+
+	
+	def directoryExists? directory 
+  		File.directory? directory
+	end
+
+	def createDirectories
+		pdfDir = "PdfTests"
+		htmlDir = "HtmlTests"
+		`mkdir #{pdfDir}` if !(directoryExists? pdfDir)
+		`mkdir #{htmlDir}` if !(directoryExists? htmlDir)
+
 	end
 end
 
