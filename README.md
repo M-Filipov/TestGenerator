@@ -2,7 +2,9 @@ TestGenerator
 =============
 
        
-Uses:  -rubygems
+Uses: 
+
+       -rubygems
        -gem Prawn
        -gem pdf-reader
        -cgi
@@ -24,7 +26,9 @@ Execute: $ ruby Main arg
 
 arg: positive integer, specifies number of tests to be generated.
 
-Files: -Main.rb
+Files:        
+
+       -Main.rb
        -NumberGenerator.rb
        -TestGenerator.rb
        -PdfGenerator.rb
