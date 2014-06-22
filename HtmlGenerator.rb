@@ -27,21 +27,21 @@ class HtmlGenerator
   			s[i] = line
 			i+=1
 		end
+		
 		f.close
-		lel = "test"
+
 		`rm #{txtName}`
 
-		# puts @@tg.orType
 		cgi = CGI.new("html4")
 		f =  File.open("HtmlTests/"+name, "w")
 		if name.include? "answers"
 			cherta = ""
 			arr = [""]			
 		else 
-			s = "____"
+			cherta = "____"
 			arr = [1,2,3,4,5,6,7,8,9,10,11,12]
 		end
-		if name.include? "answers" 
+
 		f.puts cgi.html{
 		     		cgi.head{ "\n"+cgi.title{name} } +
 		      		cgi.body{ "\n"+
@@ -169,14 +169,9 @@ class HtmlGenerator
 		         		}
 		      		}
 		  		}
-	end
-	
-
-
-	
 	
 	end
 	
-	end
+end
 
 

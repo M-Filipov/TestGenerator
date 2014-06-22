@@ -21,7 +21,7 @@ class Main
 			@@hg.createHtml("test" + (i+1).to_s+".html")
 			@@hg.createHtml("answerstest" + (i+1).to_s+".html")
 		end
-		@@hg.createHtml "testAnswers1.html"
+
 		puts"Finished..."
 	end
 
