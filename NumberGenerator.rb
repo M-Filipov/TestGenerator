@@ -50,4 +50,3 @@ class NumberGenerator
 
 end
 
-puts "Processing..."

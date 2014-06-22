@@ -1,5 +1,5 @@
 	require_relative "NumberGenerator"
-	require_relative "HtmlGenerator"
+
 
 	class TestGenerator < NumberGenerator
 		
