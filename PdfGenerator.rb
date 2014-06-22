@@ -53,7 +53,7 @@ class PdfGenerator < TestGenerator
 		pdf.text s[20].to_s
 		pdf.text s[22].to_s
 		pdf.text s[24].to_s	
-	pdf.render_file ("PdfTests/"+name+"aswers")
+		pdf.render_file ("PdfTests/"+"answers"+name)
 		
 		
 		
