@@ -1,42 +1,42 @@
 	require_relative "NumberGenerator"
+	require_relative "HtmlGenerator"
 
 	class TestGenerator < NumberGenerator
 		
 		def initialize 
 		end
 	
-		@t = NumberGenerator.new 0
-	
-		@@orig = @t.genSimpleHex 2
-		@@insert = @t.genSingleDigitHex
-		@@testValue = @t.genComplexHex 2
+		@@t = NumberGenerator.new 0
 		@@answers = String.new
 		
 		def orType
+			orig = @@t.genSimpleHex 2
+			insert = @@t.genSingleDigitHex
 			shift = genShiftNum 0, false
-			a = (@@orig.hex | (@@insert.hex << shift)).to_s(16)
+			a = (orig.hex | (insert.hex << shift)).to_s(16)
 			s = String.new
 			s << "a = ? \n"
-			s << "int orig = #{@@orig} \n"
-			s << "int insert = 000#{@@insert} \n"
+			s << "int orig = #{orig} \n"
+			s << "int insert = 000#{insert} \n"
 			s << "int a = orig | (insert << #{shift}) \n\n\n"
-			@@answers << "a = #{a}\n"
 			
 			return s
 		end
 		
 		
 		def andType 
+			orig = @@t.genSimpleHex 2
+			insert = @@t.genSingleDigitHex
 			shift = genShiftNum 0, false
-			a = (@@orig.hex | (@@insert.hex << shift)).to_s(16)
+			a = (orig.hex | (insert.hex << shift)).to_s(16)
 			shift1 = genShiftNum 0, true
-			b = (@@orig.hex | (@@insert.hex << shift1)).to_s(16)
+			b = (orig.hex | (insert.hex << shift1)).to_s(16)
 			andd = a.hex & b.hex
 		
 			s = String.new
 			s << "andd = ? \n"
-			s << "int orig = #{@@orig} \n"
-			s << "int insert = 000#{@@insert} \n"
+			s << "int orig = #{orig} \n"
+			s << "int insert = 000#{insert} \n"
 			s << "int a = orig | (insert << #{shift}) \n"
 		   	s << "int b = orig | (insert << #{shift1}) \n"
 		   	s << "int andd = a & b \n\n\n"
@@ -46,16 +46,18 @@
 	
 	
 		def xorType 
+			orig = @@t.genSimpleHex 2
+			insert = @@t.genSingleDigitHex
 			shift = genShiftNum 0, true
-			a = (@@orig.hex | (@@insert.hex << shift)).to_s(16)
+			a = (orig.hex | (insert.hex << shift)).to_s(16)
 			shift1 = genShiftNum 0, true
-			b = (@@orig.hex | (@@insert.hex << shift1)).to_s(16)
+			b = (orig.hex | (insert.hex << shift1)).to_s(16)
 			xor = (a.hex ^ b.hex).to_s(16)
 		
 			s = String.new
 			s << "xor = ? \n"
-			s << "int orig = #{@@orig} \n"
-			s << "int insert = 000#{@@insert} \n"
+			s << "int orig = #{orig} \n"
+			s << "int insert = 000#{insert} \n"
 			s << "int a = orig | (insert << #{shift}) \n"
 		   	s << "int b = orig | (insert << #{shift1}) \n"
 		   	s << "int xor = a ^ b \n\n\n"
@@ -66,13 +68,15 @@
 	
 
 		def shestaZad 
-			i = @@orig
+			orig = @@t.genSimpleHex 2
+			insert = @@t.genSingleDigitHex
+			i = orig
 			shift = genShiftNum 1, true
 			left = (i.hex | (1 << shift)).to_s(16)
 		
 			s = String.new
 			s << "left = ? \n"
-			s << "int i = #{@@orig} \n"
+			s << "int i = #{orig} \n"
 			s << "int left = #{i} | (1 << #{shift}) \n\n\n" 
 			@@answers << "left = #{left} \n"
 			return s
@@ -80,6 +84,7 @@
 	
 	
 		def sevenZad 
+
 			value1 = genComplexHex 2
 			value2 =  genComplexHex 1
 			shift1 = genShiftNum 0, true
@@ -119,9 +124,10 @@
 	
 	
 		def devetaZad 
+			testValue = @@t.genComplexHex 2
 			a = 0
 			shift = genShiftNum 0, false
-			if(@@testValue.hex & (0x1 << shift))
+			if(testValue.hex & (0x1 << shift))
 				a = 1
 			else
 				a = 2
@@ -129,7 +135,7 @@
 		
 			s = String.new
 			s << "a = ?\n"
-			s << "long testValue = #{@@testValue} \n"
+			s << "long testValue = #{testValue} \n"
 			s << "int a = 0 \n"
 			s << "if (testValue & (1 << #{shift}))
 {
@@ -148,8 +154,9 @@ a = 2
 	def desetaZad 
 		a = 0
 		result = 0
+		testValue = @@t.genComplexHex 2
 		shift = genShiftNum 0, false
-		if( (result = @@testValue.hex & @@testValue.hex ^ @@testValue.hex | (0x1 << shift)) )
+		if( (result = testValue.hex & testValue.hex ^ testValue.hex | (0x1 << shift)) )
 			a = 1
 		else
 			a = 2
@@ -206,8 +213,6 @@ a = 2
 		s << "int result = ( (value1 << #{shift1}) ^ (value2 >> #{shift2}) ) \n\n\n" 
 
 		@@answers << "result = #{result}"
-		
-		puts @@answers
 		return s
 	end
 	
@@ -215,16 +220,3 @@ a = 2
 	
 
 end
-
-	test = TestGenerator.new
-
-	test.orType
-	test.andType
-	test.xorType
-	test.shestaZad
-	test.sevenZad
-	test.osmaZad
-	test.devetaZad
-	test.desetaZad
-	test.eleventh
-	test.twelveth

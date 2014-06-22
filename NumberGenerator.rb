@@ -1,3 +1,5 @@
+require "prawn"
+
 class NumberGenerator
 	
 
@@ -47,3 +49,5 @@ class NumberGenerator
 	end
 
 end
+
+puts "Processing..."
