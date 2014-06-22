@@ -20,7 +20,8 @@
 			s << "int insert = 000#{insert} \n"
 			s << "int a = orig | (insert << #{shift}) \n\n\n"
 			
-			return s
+
+			return [s,a]
 		end
 		
 		
@@ -34,14 +35,14 @@
 			andd = a.hex & b.hex
 		
 			s = String.new
-			s << "andd = ? \n"
+			s << "AND = ? \n"
 			s << "int orig = #{orig} \n"
 			s << "int insert = 000#{insert} \n"
 			s << "int a = orig | (insert << #{shift}) \n"
 		   	s << "int b = orig | (insert << #{shift1}) \n"
 		   	s << "int andd = a & b \n\n\n"
 			@@answers << "andd = #{andd} \n"
-			return s
+			return [s,andd]
 		end
 	
 	
@@ -62,7 +63,7 @@
 		   	s << "int b = orig | (insert << #{shift1}) \n"
 		   	s << "int xor = a ^ b \n\n\n"
 			@@answers << "xor = #{xor} \n"
-			return s
+			return [s,xor]
 		end
 	
 	
@@ -79,7 +80,7 @@
 			s << "int i = #{orig} \n"
 			s << "int left = #{i} | (1 << #{shift}) \n\n\n" 
 			@@answers << "left = #{left} \n"
-			return s
+			return [s,left]
 		end
 	
 	
@@ -98,7 +99,7 @@
 			s << "long value2 = #{value2} \n"
 			s << "int result = (#{value1} << #{shift1}) ^ (#{value2} >> #{shift2}) \n \n \n"		
 			@@answers << "result = #{result} \n"
-			return s 
+			return [s,result]
 		
 		end
 	
@@ -117,7 +118,7 @@
 			s << "value2 = #{value2} \n"
 			s << "int result = (value1 << #{shift1}) ^ (value2 >> #{shift2})\n \n \n"	
 			@@answers << "result = #{result} \n"
-			return s
+			return [s,result]
 		end
 	
 	
@@ -146,7 +147,7 @@ else
 a = 2
 } \n\n\n"
 		@@answers << "a = #{a}\n"
-			return s
+			return [s,a]
 		end
 	
 	
@@ -176,7 +177,7 @@ a = 2
 }  \n \n \n \n"
 	
 	@@answers << "a = #{a} \n"
-	return s
+	return [s,a,result]
 	end
 	
 	
@@ -194,7 +195,7 @@ a = 2
 		s << "int result = ( (value1 << #{shift1}) ^ (value2 >> #{shift2}) ) \n\n\n" 
 
 		@@answers << "result = #{result} \n"
-		return s
+		return [s,result]
 	end
 	
 	
@@ -213,7 +214,7 @@ a = 2
 		s << "int result = ( (value1 << #{shift1}) ^ (value2 >> #{shift2}) ) \n\n\n" 
 
 		@@answers << "result = #{result}"
-		return s
+		return [s,result]
 	end
 	
 	

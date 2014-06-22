@@ -11,27 +11,29 @@ class HtmlGenerator
 
 
 	def createHtml name
+		pdfName = "PdfTests/"+name.gsub(/.html/, ".pdf")
+		txtName = "HtmlTests/"+name.gsub(/.html/, ".txt")
 		s = []
-		f = File.open(name.gsub(/.html/, ".txt"), "w")
-		PDF::Reader.open(name.gsub(/.html/, ".pdf") { |match|  }) do |reader|
+		f = File.open(txtName, "w")
+		PDF::Reader.open(name1 = "PdfTests/"+name.gsub(/.html/, ".pdf") { |match|  }) do |reader|
 		  reader.pages.each do |page|
 		  	f.puts page.text
 			end
 		end
 		f.close
 		i=0
-		txtName = name.gsub(/.html/, ".txt")
-		f = File.open(name.gsub(/.html/, ".txt"), "r")
+		f = File.open(txtName, "r")
 		f.each_line do |line|
   			s[i] = line
 			i+=1
 		end
 		f.close
+		lel = "test"
 		`rm #{txtName}`
 
 		# puts @@tg.orType
 		cgi = CGI.new("html5")
-		f =  File.open(name, "w") 
+		f =  File.open("HtmlTests/"+name, "w") 
 		f.puts cgi.html{
 		     		cgi.head{ "\n"+cgi.title{name} } +
 		      		cgi.body{ "\n"+

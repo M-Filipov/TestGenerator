@@ -9,25 +9,18 @@ class PdfGenerator < TestGenerator
 	
 	def createPdf name
 		pdf = Prawn::Document.new
-		f = File.open("TETETETETETest", "w")
-		f.puts @@tg.orType
-		pdf.text @@tg.orType
-		pdf.text @@tg.orType
-		pdf.text @@tg.andType
-		pdf.text @@tg.andType
-		pdf.text @@tg.xorType
-		pdf.text @@tg.shestaZad
-		pdf.text @@tg.sevenZad
-		pdf.text @@tg.osmaZad
-		pdf.text @@tg.devetaZad
-		pdf.text @@tg.desetaZad
-		pdf.text @@tg.eleventh
-		pdf.text @@tg.twelveth
-		pdf.render_file name
+		pdf.text @@tg.orType[0]
+		pdf.text @@tg.orType[0]
+		pdf.text @@tg.andType[0]
+		pdf.text @@tg.andType[0]
+		pdf.text @@tg.xorType[0]
+		pdf.text @@tg.shestaZad[0]
+		pdf.text @@tg.sevenZad[0]
+		pdf.text @@tg.osmaZad[0]
+		pdf.text @@tg.devetaZad[0]
+		pdf.text @@tg.desetaZad[0]
+		pdf.text @@tg.eleventh[0]
+		pdf.text @@tg.twelveth[0]
+		pdf.render_file ("PdfTests/"+name)
 	end
 end
-
-# pg = PdfGenerator.new
-# ARGV[0].to_i.times do |i|
-# 	pg.createPdf("test"+i.to_s)	
-# end
