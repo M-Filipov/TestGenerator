@@ -33,8 +33,7 @@ Files:
        -Main.rb
        -NumberGenerator.rb
        -TestGenerator.rb
-       -PdfGenerator.rb
-       -HtmlGenerator.rb
+       -FileGenerator.rb
        
        
 
