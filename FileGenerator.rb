@@ -1,5 +1,4 @@
 require "prawn"
-require "pdf/reader/html"
 require "cgi"
 require_relative "TestGenerator"
 
