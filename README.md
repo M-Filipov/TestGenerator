@@ -1,4 +1,4 @@
-TestGenerator
+Bitwise TestGenerator
 =============
 
        
